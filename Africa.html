@@ -12,7 +12,8 @@
     <body>
 <h1>Africa 2025</h1>
 
-<button onclick="openGallery('southAfrica')" class="map-button" style="left: 170px;">
+<div class="map-container">
+<button onclick="openGallery('southAfrica')" class="map-button">
   <img
         id="South-Africa"
         src="SA.svg"
@@ -20,7 +21,7 @@
         >
     </button>
 
- <button onclick="openGallery('zimbabwe')" class="map-button" style="left: 600px;" >
+ <button onclick="openGallery('zimbabwe')" class="map-button">
   <img
         id="Zimbabwe"
         src="Zimbabwe.svg.png"
@@ -28,13 +29,14 @@
         >
 </button>
 
-<button onclick="openGallery('botswana')" class="map-button" style="left: 1100px;">
+<button onclick="openGallery('botswana')" class="map-button">
   <img
         id="Botswana"
         src="botswana.svg"
         alt="Botswana Map"
         >
 </button>
+</div>
 
 <!-- Lightbox Modal -->
 <div id="galleryModal" class="slideshow-container">

@@ -51,16 +51,24 @@ h1 {
   background: none;
   border: none;
   padding: 0;
-  margin: 0;
+  margin: 10px;
   cursor: pointer;
-  position: fixed; /* same as the original image */
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative; /* same as the original image */
+  transform: none;
   transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.map-container {
+  display: flex;
+  justify-content: center;  /* center buttons horizontally */
+  flex-wrap: wrap;          /* allow wrapping on small screens */
+  gap: 200px;                /* space between buttons */
+  margin: 90px 20px 0;           /* vertical spacing */
 }
 
 .map-button:hover {
-    transform: translateY(-50%) scale(1.1);
+    transform: scale(1.1);
 }
 
 .slideshow-container {
@@ -124,4 +132,18 @@ h1 {
   right: 0;
 }
 
+@media (max-width: 600px) {
+  .footer {
+    padding: 20px 10px;  /* smaller padding on narrow screens */
+    font-size: 16px;     /* smaller font for readability */
+  }
+}
+
+@media (max-width: 600px) {
+  .slideshow-container {
+    width: 95vw;  /* 95% of viewport width */
+    max-width: none;  /* remove max-width */
+    padding: 10px;    /* less padding */
+  }
+}
 
