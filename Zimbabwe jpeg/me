@@ -1,0 +1,771 @@
+<!doctype html>             <!-- HTML declaration, language = English-->        
+<html lang="en">    
+<head>                        <!-- the 'brain', no visual content displayed on web page-->
+        <meta charset="UTF-8" />          <!-- characters-->                        
+        <title>Africa 2025</title>    
+        <link rel="stylesheet" href="Africa.css" /> 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+    <body>
+<h1>Africa 2025</h1>
+
+<button onclick="openGallery('southAfrica')" class="map-button" style="left: 170px;">
+  <img
+        id="South-Africa"
+        src="SA.svg"
+        alt="South Africa Map"
+        >
+    </button>
+
+ <button onclick="openGallery('zimbabwe')" class="map-button" style="left: 600px;" >
+  <img
+        id="Zimbabwe"
+        src="Zimbabwe.svg.png"
+        alt="Zimbabwe Map"
+        >
+</button>
+
+<button onclick="openGallery('botswana')" class="map-button" style="left: 1100px;">
+  <img
+        id="Botswana"
+        src="botswana.svg"
+        alt="Botswana Map"
+        >
+</button>
+
+<!-- Lightbox Modal -->
+<div id="galleryModal" class="slideshow-container">
+  <a class="close" onclick="closeGallery()">&times;</a>
+  <div id="slideshowInner"></div>
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+
+    <footer class="footer">
+        <p> This year I was lucky enough to travel to the beautiful continent of Africa. I started out in Johannesburg of South Africa,
+            and made my way over to Zimbabwe and Botswana! This trip was focused towards the incredible wildlife and nature reserves, and Victoria
+            Falls - one of the seven natural wonders of the world. The 'Big Five' of Africa are the Leopard, Lion, Elephant, Rhino, and Buffalo... I was 
+            fortunately able to encounter all five, and so much more. 
+        </p>
+    </footer>
+
+
+
+<script>
+  let slideIndex = 1;
+
+// Define images per gallery
+const galleries = {
+  southAfrica: [
+    { src: "jpeg images!/sa1.jpg", caption: "Elephant !!" },
+    { src: "jpeg images!/sa2.jpg", caption: "Impala !!" },
+    { src: "jpeg images!/sa3.jpg", caption: "Road trip" },
+    { src: "jpeg images!/sa4.jpg", caption: "Me 🤙" },
+    { src: "jpeg images!/sa5.jpg", caption: "Resort" },
+    { src: "jpeg images!/sa6.jpg", caption: "Pit stop @ an Orange farm" },
+    { src: "jpeg images!/sa7.jpg", caption: "Me again 👀" },
+    { src: "jpeg images!/sa8.jpg", caption: "Rhino's are in hiding" },
+    { src: "jpeg images!/sa9.jpg", caption: "Sunrise flight" },
+    { src: "jpeg images!/sa11.jpg", caption: "Idk this woman 🙈" },
+    { src: "jpeg images!/sa12.jpg", caption: "Damn who is that 🔥" },
+    { src: "jpeg images!/sa13.jpg", caption: "🐘" },
+    { src: "jpeg images!/sa14.jpg", caption: "Big boy Impala" },
+    { src: "jpeg images!/sa15.jpg", caption: "☀️" },
+    { src: "jpeg images!/sa16.jpg", caption: "Sunrise safari" },
+    { src: "jpeg images!/sa17.jpg", caption: "Lion King vibes" },
+    { src: "jpeg images!/sa18.jpg", caption: "Resort in night mode" },
+    { src: "jpeg images!/sa19.jpg", caption: "Traditional South African Food" },
+    { src: "jpeg images!/sa20.jpg", caption: "Who dat gurl" },
+    { src: "jpeg images!/sa21.jpg", caption: "Le Sun is Rising" },
+    { src: "jpeg images!/sa22.jpg", caption: "Tusky elephant" },
+    { src: "jpeg images!/sa23.jpg", caption: "Giraffe" },
+    { src: "jpeg images!/sa24.jpg", caption: "Monkey family" },
+    { src: "jpeg images!/sa25.jpg", caption: "🐒" },
+    { src: "jpeg images!/sa26.jpg", caption: "🦒" },
+    { src: "jpeg images!/sa27.jpg", caption: "Scenic views" },
+    { src: "jpeg images!/sa28.jpg", caption: "Croc infested waters" },
+    { src: "jpeg images!/sa29.jpg", caption: "Golf course with Hippo's 🦛" },
+  ],
+  zimbabwe: [
+    { src: "Zimbabwe jpeg/zim1.jpg", caption: "Zimbabwe Resort 🌴" },
+    { src: "Zimbabwe jpeg/zim2.jpg", caption: "The huts 🛖" },
+    { src: "Zimbabwe jpeg/zim3.jpg", caption: "A snack and a snacc" },
+    { src: "Zimbabwe jpeg/zim4.jpg", caption: "Spiderman takeover Zimbabwe edition" },
+    { src: "Zimbabwe jpeg/zim5.jpg", caption: "#Poser" },
+    { src: "Zimbabwe jpeg/zim6.jpg", caption: "Victoria Falls!!" },
+    { src: "Zimbabwe jpeg/zim7.jpg", caption: "💦" },
+    { src: "Zimbabwe jpeg/zim8.jpg", caption: "📸" },
+    { src: "Zimbabwe jpeg/zim9.jpg", caption: "✌️ Peace and Love ✌️" },
+    { src: "Zimbabwe jpeg/zim10.jpg", caption: "More water" },
+    { src: "Zimbabwe jpeg/zim11.jpg", caption: "Water but with trees" },
+    { src: "Zimbabwe jpeg/zim12.jpg", caption: "A Rainbow!! 🌈" },
+    { src: "Zimbabwe jpeg/zim13.jpg", caption: "Big snapper 🐊" },
+    { src: "Zimbabwe jpeg/zim14.jpg", caption: "Shaking in my boots 🫨" },
+    { src: "Zimbabwe jpeg/zim15.jpg", caption: "Zimbabwe sunset" },
+    { src: "Zimbabwe jpeg/zim16.jpg", caption: "🌄" },
+    { src: "Zimbabwe jpeg/zim17.jpg", caption: "Contemplating life @ Victoria Falls" },
+  ],
+  botswana: [
+    { src: "Botswana jpeg/bot1.JPEG", caption: "Another Safari !!" },
+    { src: "Botswana jpeg/bot2.jpg", caption: "Botswana immigration" },
+    { src: "Botswana jpeg/bot3.jpg", caption: "Upside down tree" },
+    { src: "Botswana jpeg/bot4.jpg", caption: "Chobe River" },
+    { src: "Botswana jpeg/bot5.jpg", caption: "Insane person spotted on the Chobe River" },
+    { src: "Botswana jpeg/bot6.jpg", caption: "Crocodile in hiding" },
+    { src: "Botswana jpeg/bot7.jpg", caption: "New soft drink flavour - 10/10" },
+    { src: "Botswana jpeg/bot8.jpg", caption: "Fancy bird (I forgot it's name)" },
+    { src: "Botswana jpeg/bot9.jpg", caption: "Mumma and baby Elephant" },
+    { src: "Botswana jpeg/bot10.jpg", caption: "Dinosaur 🦖" },
+    { src: "Botswana jpeg/bot11.jpg", caption: "Lioness's sunbaking ☀️" },
+    { src: "Botswana jpeg/bot12.jpg", caption: "Cheeky Elephants" },
+    { src: "Botswana jpeg/bot13.jpg", caption: "🐘🐘🐘" },
+    { src: "Botswana jpeg/bot14.jpg", caption: "Cutie pies" },
+    { src: "Botswana jpeg/bot15.jpg", caption: "Cutie pies zoomed in" },
+    { src: "Botswana jpeg/bot16.jpg", caption: "Cutie pies crossing the river" },
+    { src: "Botswana jpeg/bot17.jpg", caption: "Angry Hippo" },
+    { src: "Botswana jpeg/bot18.jpg", caption: "Tree of life 🌳" },
+  ]
+};
+
+function openGallery(location) {
+  const gallery = galleries[location];
+  if (!gallery) {
+    alert("Gallery for " + location + " not found.");
+    return;
+  }
+
+  // Build slideshow HTML
+  const slideshowInner = document.getElementById('slideshowInner');
+  slideshowInner.innerHTML = gallery.map((img, i) => `
+    <div class="mySlides fade">
+      <div class="numbertext">${i + 1} / ${gallery.length}</div>
+      <img src="${img.src}" style="width:100%">
+      <div class="text">${img.caption}</div>
+    </div>
+  `).join('');
+
+  // Show modal
+  document.getElementById('galleryModal').style.display = 'block';
+  document.body.style.overflow = 'auto';
+  slideIndex = 1;
+  showSlides(slideIndex);
+}
+
+function closeGallery() {
+  document.getElementById('galleryModal').style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function showSlides(n) {
+  const slides = document.getElementsByClassName("mySlides");
+  if (slides.length === 0) return;
+  if (n > slides.length) { slideIndex = 1 }
+  if (n < 1) { slideIndex = slides.length }
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slides[slideIndex - 1].style.display = "block";
+}
+</script>
+  
+    </body>
+</html>
+
+
+html, body {
+  background-image: url("background-image.webp"); /* path to your image */
+  background-size: cover;          /* Scale to fill screen */
+  background-repeat: no-repeat;    /* No repeating */
+  background-position: center;     /* Center the image */
+  background-attachment: fixed; 
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+  margin-top: 40px;
+  color: white;
+  font-size: 70px;
+}
+
+#South-Africa {
+    max-width: 200px;
+}
+
+#Zimbabwe {
+    width: 200px;
+}
+
+#Botswana {
+    max-width: 180px;
+}
+
+
+.footer {
+    text-align: center;
+    margin-top: auto;
+    padding: 40px 240px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);
+}
+
+.map-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  position: fixed; /* same as the original image */
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+.map-button:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.slideshow-container {
+  display:none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: rgba(0,0,0,0.9);
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 800px;
+}
+
+.mySlides {
+  display: none;
+}
+
+.mySlides img {
+   max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.numbertext, .text {
+  color: white;
+  text-align: center;
+  padding: 8px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  user-select: none;
+  transform: translateY(-50%);
+}
+
+.prev {
+  left: 0;
+}
+
+.next {
+  right: 0;
+}
+
+h1 {
+  margin-top: 40px;
+  margin-bottom: 60px;
+  font-family: "Bitcount Grid Double", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400; 
+  font-style: normal;
+  text-align: center;
+  font-variation-settings:
+    "slnt" 0,
+    "CRSV" 0.5,
+    "ELSH" 0,
+    "ELXP" 0;
+}
+
+body, html {
+  background: #f3b9d0; /* soft pink background */
+  cursor: url('doraemon-cursor-2.png') 8 8, auto !important; 
+  font-family: "Bitcount Grid Double", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 350; 
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "CRSV" 0.5,
+    "ELSH" 0,
+    "ELXP" 0;
+}
+
+
+.click-me {
+    max-width: 48px;
+    height: auto;
+    position: absolute;
+    margin-left: 765px;
+    margin-top: 67px;
+    z-index: 2;
+}
+
+#click-me:hover {
+    transform: scale(1.1);
+}
+
+.doraemon-bottom {
+    max-width: 100px;
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%); /* Centers horizontally */
+    margin-bottom: 0px; /* Space above the border (adjust as needed) */
+    z-index: 100; /* Ensures it stays above other elements */
+}
+
+
+.closed-letter {
+    width: 120px;
+    height: 90px;
+    background: #9acdde;
+    border-radius: 15px 15px 15px 15px;
+    box-shadow: 0 5px 10px rgba(77, 128, 146, 0.5);
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 48px;
+    user-select: none;
+    margin: 0 auto;
+    z-index: 1;
+}
+.closed-letter:hover {
+    transform: scale(1.1);
+}
+                        /*target the element ID. 
+                          set size of letter box - width and height in pixels.
+                          hex colour code for box.
+                          border-readius = rounding of corners.
+                          box-shadow = shading beneath pink box for floating/shadow effect, shadow offset 5px down and blurred with opacity. 
+                          cursor changes to hand pointer when hovering over the letter - indicates 'click'.
+                          element position set to relative, child elemants can be positioned inside this container.
+                          transform = property smoothly transitions over 0.3s.
+                          user-select: none; = prevents user from selecting emoji/text when clicking.
+                          margin: 0 auto; = automatic margins left and right to centre letter block inside parent container. */
+
+                        /*Hover effect - when mouse hovers over letter, grows 10% bigger. Scale 1.1 */
+
+
+/* Opened letter with lined paper */
+#open-letter {
+    display: none; /* hidden by default */
+    width: 320px;
+    height: 420px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    position: relative;
+    padding: 25px 30px 60px 30px;
+    background-image:
+        repeating-linear-gradient(
+            to bottom,
+            #e0e0e0,
+            #e0e0e0 1px,
+            transparent 1px,
+            transparent 24px
+        );
+    overflow-y: auto;
+    color: #333333;
+    line-height: 1.6;
+    font-size: 16px;
+    margin: 0 auto; /* center horizontally */
+    text-align: left;
+}
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: #9acdde;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 26px;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(77, 128, 146, 0.5);
+    transition: background-color 0.3s ease;
+    user-select: none;
+}
+#close-btn:hover {
+    background-color: #f197db;
+}
+
+.tabbed-box {
+  border: 2px solid #f3b9d0;
+  border-radius: 20px;
+  overflow: hidden;
+  max-width: 800px;
+  height: 500px; 
+  margin: 90px auto 0;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 150px;
+}
+
+.tab-headers {
+  display: flex;
+  background: #f8d7e6;
+  flex-shrink: 0;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: "Bitcount Grid Double", system-ui;
+  font-size: 16px;
+  transition: all 0.3s;
+  text-align: center;
+  position: relative;
+}
+
+.tab-btn:hover {
+  background: #f3b9d0;
+}
+
+.tab-btn.active {
+  background: #f3b9d0;
+  font-weight: bold;
+}
+
+.tab-content {
+  display: none;
+  padding: 20px;
+  animation: fadeIn 0.5s;
+  overflow-y: auto; /* Add vertical scroll */
+  height: 100%; /* Take up remaining space */
+  box-sizing: border-box;
+}
+
+.tab-content[style*="display: block"] {
+  display: flex !important;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Smooth scrolling for tab content */
+.tab-content {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar (optional) */
+.tab-content::-webkit-scrollbar {
+  width: 8px;
+}
+.tab-content::-webkit-scrollbar-thumb {
+  background: #77d2e2;
+  border-radius: 4px;
+}
+.tab-content::-webkit-scrollbar-track {
+  background: #b2eaf5;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.contact-footer {
+  background: #f3b9d0; /* Your pink color */
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 25px 0;
+  border-top: 2px solid #d46b9a; /* Darker pink border */
+  font-family: "Bitcount Grid Double", system-ui;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px; /* Wraps on small screens */
+  padding: 0 15px;
+  text-align: center;
+}
+
+.footer-section h4 {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.footer-section p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.footer-link {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.footer-link:hover {
+  color: #9acdde; /* Your letter's blue color */
+}
+
+/* For mobile responsiveness */
+@media (max-width: 600px) {
+  .footer-section {
+    flex: 100%;
+    margin-bottom: 15px;
+  }
+}
+
+<!doctype html>             <!-- HTML declaration, language = English-->        
+<html lang="en">           
+    <head>                        <!-- the 'brain', no visual content displayed on web page-->
+        <meta charset="UTF-8" />          <!-- characters-->                        
+        <title>Jacqueline Tippett</title>            <!-- tab name-->            
+        <link rel="icon" type="image/png" href="Doraemon_character.png"> <!--doreamon favicon-->
+        <link rel="stylesheet" href="jacqueline2.css" />       <!-- File path to jacqueline2.css-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">     <!-- connect to google-->
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>      <!-- import google font, defined in CSS-->
+        <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap"                       
+        rel="stylesheet">
+        
+    <body>      <!-- content for display-->
+
+        <h1>~ The Jacqueline Universe ~</h1> <!--heading 1-->
+
+    <img
+        class="click-me"
+        id="click-me"
+        src="hand cursor.png"
+        alt="click me hand"
+        >
+
+    <img
+        class="doraemon-bottom"
+        src="dd.png"
+        alt="doraemon shocked face"
+        >
+
+    <!-- Closed blue letter -->
+    <div id="closed-letter"
+         class="closed-letter"
+         title="Open the letter"   
+         onclick="openLetter()"> 💌                     
+    </div>       
+                                     <!--division = container. ID = (closed-letter), target the ID with CSS and Java-->
+                                     <!--title="" triggers cursor change and letter enlarges -->
+                                     <!--onclick "openLetter()" runs JS function opening letter. Emoji is 'button' responding to user click-->                          
+
+
+    <!-- Open letter and content -->
+    <div id="open-letter" class="open-letter" role="dialog" aria-modal="true" aria-labelledby="letter-title">
+
+        <p id="letter-title" style="font-weight: normal; margin-bottom: 1em;">Hey team!</p>
+        <p> I'm so excited to share this project with you - can you tell I like pink?... and Doraemon?</p>
+        <p> It's been the most fun building this website, 
+            my stylistic choices are a bright reflection of my personality. I hope you like it as much as I do. </p>
+        <p>-Enjoy exploring! 🫶 </p>
+        <img src="https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png" alt="Doraemon" width="100" style="display: block; margin: 0 auto; transform: translateX(-55px)">
+
+        <button id="close-btn" class="close-btn" onclick="closeLetter()" aria-label="Close letter">&times;</button>
+    </div>
+                                     <!--ID = (open-letter)-->
+                                     <!--role="dialog" delcaring dialog box / message pop up-->
+                                     <!--aria-modal="true" indicates to screen readers dialog is present - user to focus here-->
+                                     <!--aria-labelledby+"letter-title" connects dialog title to screen readers (accessibility)-->
+                                     <!--ID = (letter-title) connects aria attributes to dialog content-->
+                                     <!--<p> = paragraph of text-->
+                                     <!--style= include CSS (make bold, add space below)-->   
+                                     <!--main body of text in inside <p>" "<p>-->
+                                     <!--closing text within <p>" "<p>-->
+                                     <!--<button> = user click button. ID = (close-btn)-->   
+                                     <!--onclick "closeLetter()" runs JS function closing letter/envelope.-->
+                                     <!--aria-label="close ltetter" announces 'close letter' through screen reader, &times; = symbol for X-->
+
+    <div class="tabbed-box">
+  <!-- Tab Headers -->
+  <div class="tab-headers">
+    <button class="tab-btn active" onclick="openTab(event, 'About me')">About me</button>
+    <button class="tab-btn" onclick="openTab(event, 'Experience')">Experience</button>
+    <button class="tab-btn" onclick="openTab(event, 'Up')">Up</button>
+    <button class="tab-btn" onclick="openTab(event, 'In the Works')">In the Works</button>
+  </div>
+  
+  <!-- Tab Content -->
+  <div id="About me" class="tab-content" style="display: block;">
+    <h3>All about me (in as few words as possible) 💗</h3>
+    <p>I'm 24 years old with a huge passion for travel, dance, and a growing interest in the world of software! 
+        I've spent my most recent years balancing travel, hobbies, study and work. Before my current role at Up 
+        I was working as a pre-kinder teacher, I have a great love for children and education and within that time 
+        I was dabbling in software development self study, which ultimately pushed me for a career change. </p>
+        
+    <p> I started off learning the basics of C, before taking my first steps into the web development languages of HTML, CSS and 
+        JavaScript. I'm still working on building my profficiency, and working to get React under my belt. I came to Up 
+        and Ferocia with a curiosity for potential opportunities in this field, and coincidentally the Student Engineering 
+        Program - which is genuinely such a valuable opportunity within this industry. </p>
+
+    <p>I love to dance, it's been my favourite hobby since a young age. To this day, I'll always find time to get active 
+        and release my creativity through movement at a dance class. I've also been fortunate enough to spend time exploring 
+        the world, such an expensive hobby right? I recently enjoyed a trip to Africa, exploring the nature and culture of 
+        South Africa, Zimbabwe and Botswana. </p>
+  </div>
+  
+  <div id="Experience" class="tab-content">
+    <h3>Career and job experience </h3>
+    <p>Different content here.</p>
+  </div>
+  
+  <div id="Up" class="tab-content">
+    <h3>Team Reggae - Upside Guide 🧡</h3>
+    <p>I've been at Ferocia for a bit over 6 months, I've been welcomed to the most amazing people and constantly in awe of the 
+        incredible work that is created here. I'm currently a part of Team Reggae in the front line of support, dealing with Upsider's 
+        first hand. I've dedicated the last 6 months to learning the in-and-out of my role and killing it like a pro!</p>
+
+    <p>As an Upside Guide I have honed a wide range of my personal/soft skillset to suit the Ferocian working environment, which includes:</p>
+
+         <ul class="skill-list">
+              <li>Effective time management</li>
+             <li>Prioritising and organising tasks within an independent work load</li>
+             <li>Upskilling and creating space for professional development</li>
+             <li>Collaboration and teamwork - especially in an online workspace</li>
+             <li>Seeking and implementing feedback</li>
+             <li>Attention to detail</li>
+             <li>Adaptability and continuous learning</li>
+             <li>Problem solving</li>
+         <li>Communication, with a strong understanding of cross-cultural communication and it's impact within a team.</li>
+         </ul>
+
+  </div>
+
+  <div id="In the Works" class="tab-content">
+    <h3>This is another project I've been working on!</h3>
+    <p> I recently went on a trip to Africa... I created an online gallery</p>
+    </div>
+</div>
+
+<footer class="contact-footer">
+  <!-- Section 1: Email -->
+  <div class="footer-section">
+    <h4>Email</h4>
+    <p>
+      <a href="mailto:Jacqueline.tippett@yahoo.com" class="footer-link">
+        📧 Jacqueline.Tippett@yahoo.com
+      </a>
+    </p>
+  </div>
+  
+  <!-- Section 2: Phone -->
+  <div class="footer-section">
+    <h4>Phone</h4>
+    <p>📞 0410 843 028</p>
+  </div>
+  
+  <!-- Section 3: Location -->
+  <div class="footer-section">
+    <h4>Location</h4>
+    <p>📍 Melbourne, Australia</p>
+  </div>
+  
+  <!-- Section 4: Copyright -->
+  <div class="footer-section">
+    <h4>DM me on Slack!</h4>
+    <a href="https://ferocia.slack.com/team/U07SHF5FB0C" target="_blank">Jacqueline Tippett</a>
+  </div>
+</footer>
+
+    <script> // java script
+        function openLetter() {
+            document.getElementById('closed-letter').style.display = 'none';
+            document.getElementById('open-letter').style.display = 'block';
+            document.getElementById('click-me').style.display = 'none';
+        }
+
+        function closeLetter() {
+            document.getElementById('open-letter').style.display = 'none';
+            document.getElementById('closed-letter').style.display = 'flex';
+            document.getElementById('click-me').style.display = 'block';
+        }
+
+        function openTab(evt, tabId) {
+  // Hide all tab content
+         const tabContents = document.getElementsByClassName("tab-content");
+        for (let i = 0; i < tabContents.length; i++) {
+    tabContents[i].style.display = "none";
+         }
+  
+  // Remove active class from all buttons
+         const tabButtons = document.getElementsByClassName("tab-btn");
+        for (let i = 0; i < tabButtons.length; i++) {
+         tabButtons[i].className = tabButtons[i].className.replace(" active", "");
+            } 
+  
+  // Show current tab and mark button as active
+        document.getElementById(tabId).style.display = "block";
+        evt.currentTarget.className += " active";
+}
+    </script>
+
+                                    <!--Function openletter() *hide envelope and show letter*
+                                        Finds the HTML element with the ID closed-letter. 
+                                        Envelope hidden as CSS display property set to none.
+                                        Finds the HTML element with the ID open-letter.
+                                        Open letter display property set to block, and is displayed--> 
+
+                                    <!--Function closeletter() *hide letter and show closed envelope*
+                                        Find HTML element of open letter. 
+                                        Hide open letter - CSS display property none. 
+                                        Find closed envelope element. 
+                                        Closed envelope displayed again by settung display to flex.
+                                        *Flex used for better centre alignment*-->
+    
+                                        
+
+    </body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>             <!-- HTML declaration, language = English-->        
+<html lang="en">    
+<head>                        <!-- the 'brain', no visual content displayed on web page-->
+        <meta charset="UTF-8" />          <!-- characters-->                        
+        <title>Africa 2025</title>    
+        <link rel="stylesheet" href="Africa.css" /> 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+    <body>
+<h1>Africa 2025</h1>
+
+<button onclick="openGallery('southAfrica')" class="map-button" style="left: 170px;">
+  <img
+        id="South-Africa"
+        src="SA.svg"
+        alt="South Africa Map"
+        >
+    </button>
+
+ <button onclick="openGallery('zimbabwe')" class="map-button" style="left: 600px;" >
+  <img
+        id="Zimbabwe"
+        src="Zimbabwe.svg.png"
+        alt="Zimbabwe Map"
+        >
+</button>
+
+<button onclick="openGallery('botswana')" class="map-button" style="left: 1100px;">
+  <img
+        id="Botswana"
+        src="botswana.svg"
+        alt="Botswana Map"
+        >
+</button>
+
+<!-- Lightbox Modal -->
+<div id="galleryModal" class="slideshow-container">
+  <a class="close" onclick="closeGallery()">&times;</a>
+  <div id="slideshowInner"></div>
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+
+    <footer class="footer">
+        <p> This year I was lucky enough to travel to the beautiful continent of Africa. I started out in Johannesburg of South Africa,
+            and made my way over to Zimbabwe and Botswana! This trip was focused towards the incredible wildlife and nature reserves, and Victoria
+            Falls - one of the seven natural wonders of the world. The 'Big Five' of Africa are the Leopard, Lion, Elephant, Rhino, and Buffalo... I was 
+            fortunately able to encounter all five, and so much more. 
+        </p>
+    </footer>
+
+
+
+<script>
+  let slideIndex = 1;
+
+// Define images per gallery
+const galleries = {
+  southAfrica: [
+    { src: "jpeg images!/sa1.jpg", caption: "Elephant !!" },
+    { src: "jpeg images!/sa2.jpg", caption: "Impala !!" },
+    { src: "jpeg images!/sa3.jpg", caption: "Road trip" },
+    { src: "jpeg images!/sa4.jpg", caption: "Me 🤙" },
+    { src: "jpeg images!/sa5.jpg", caption: "Resort" },
+    { src: "jpeg images!/sa6.jpg", caption: "Pit stop @ an Orange farm" },
+    { src: "jpeg images!/sa7.jpg", caption: "Me again 👀" },
+    { src: "jpeg images!/sa8.jpg", caption: "Rhino's are in hiding" },
+    { src: "jpeg images!/sa9.jpg", caption: "Sunrise flight" },
+    { src: "jpeg images!/sa11.jpg", caption: "Idk this woman 🙈" },
+    { src: "jpeg images!/sa12.jpg", caption: "Damn who is that 🔥" },
+    { src: "jpeg images!/sa13.jpg", caption: "🐘" },
+    { src: "jpeg images!/sa14.jpg", caption: "Big boy Impala" },
+    { src: "jpeg images!/sa15.jpg", caption: "☀️" },
+    { src: "jpeg images!/sa16.jpg", caption: "Sunrise safari" },
+    { src: "jpeg images!/sa17.jpg", caption: "Lion King vibes" },
+    { src: "jpeg images!/sa18.jpg", caption: "Resort in night mode" },
+    { src: "jpeg images!/sa19.jpg", caption: "Traditional South African Food" },
+    { src: "jpeg images!/sa20.jpg", caption: "Who dat gurl" },
+    { src: "jpeg images!/sa21.jpg", caption: "Le Sun is Rising" },
+    { src: "jpeg images!/sa22.jpg", caption: "Tusky elephant" },
+    { src: "jpeg images!/sa23.jpg", caption: "Giraffe" },
+    { src: "jpeg images!/sa24.jpg", caption: "Monkey family" },
+    { src: "jpeg images!/sa25.jpg", caption: "🐒" },
+    { src: "jpeg images!/sa26.jpg", caption: "🦒" },
+    { src: "jpeg images!/sa27.jpg", caption: "Scenic views" },
+    { src: "jpeg images!/sa28.jpg", caption: "Croc infested waters" },
+    { src: "jpeg images!/sa29.jpg", caption: "Golf course with Hippo's 🦛" },
+  ],
+  zimbabwe: [
+    { src: "Zimbabwe jpeg/zim1.jpg", caption: "Zimbabwe Resort 🌴" },
+    { src: "Zimbabwe jpeg/zim2.jpg", caption: "The huts 🛖" },
+    { src: "Zimbabwe jpeg/zim3.jpg", caption: "A snack and a snacc" },
+    { src: "Zimbabwe jpeg/zim4.jpg", caption: "Spiderman takeover Zimbabwe edition" },
+    { src: "Zimbabwe jpeg/zim5.jpg", caption: "#Poser" },
+    { src: "Zimbabwe jpeg/zim6.jpg", caption: "Victoria Falls!!" },
+    { src: "Zimbabwe jpeg/zim7.jpg", caption: "💦" },
+    { src: "Zimbabwe jpeg/zim8.jpg", caption: "📸" },
+    { src: "Zimbabwe jpeg/zim9.jpg", caption: "✌️ Peace and Love ✌️" },
+    { src: "Zimbabwe jpeg/zim10.jpg", caption: "More water" },
+    { src: "Zimbabwe jpeg/zim11.jpg", caption: "Water but with trees" },
+    { src: "Zimbabwe jpeg/zim12.jpg", caption: "A Rainbow!! 🌈" },
+    { src: "Zimbabwe jpeg/zim13.jpg", caption: "Big snapper 🐊" },
+    { src: "Zimbabwe jpeg/zim14.jpg", caption: "Shaking in my boots 🫨" },
+    { src: "Zimbabwe jpeg/zim15.jpg", caption: "Zimbabwe sunset" },
+    { src: "Zimbabwe jpeg/zim16.jpg", caption: "🌄" },
+    { src: "Zimbabwe jpeg/zim17.jpg", caption: "Contemplating life @ Victoria Falls" },
+  ],
+  botswana: [
+    { src: "Botswana jpeg/bot1.JPEG", caption: "Another Safari !!" },
+    { src: "Botswana jpeg/bot2.jpg", caption: "Botswana immigration" },
+    { src: "Botswana jpeg/bot3.jpg", caption: "Upside down tree" },
+    { src: "Botswana jpeg/bot4.jpg", caption: "Chobe River" },
+    { src: "Botswana jpeg/bot5.jpg", caption: "Insane person spotted on the Chobe River" },
+    { src: "Botswana jpeg/bot6.jpg", caption: "Crocodile in hiding" },
+    { src: "Botswana jpeg/bot7.jpg", caption: "New soft drink flavour - 10/10" },
+    { src: "Botswana jpeg/bot8.jpg", caption: "Fancy bird (I forgot it's name)" },
+    { src: "Botswana jpeg/bot9.jpg", caption: "Mumma and baby Elephant" },
+    { src: "Botswana jpeg/bot10.jpg", caption: "Dinosaur 🦖" },
+    { src: "Botswana jpeg/bot11.jpg", caption: "Lioness's sunbaking ☀️" },
+    { src: "Botswana jpeg/bot12.jpg", caption: "Cheeky Elephants" },
+    { src: "Botswana jpeg/bot13.jpg", caption: "🐘🐘🐘" },
+    { src: "Botswana jpeg/bot14.jpg", caption: "Cutie pies" },
+    { src: "Botswana jpeg/bot15.jpg", caption: "Cutie pies zoomed in" },
+    { src: "Botswana jpeg/bot16.jpg", caption: "Cutie pies crossing the river" },
+    { src: "Botswana jpeg/bot17.jpg", caption: "Angry Hippo" },
+    { src: "Botswana jpeg/bot18.jpg", caption: "Tree of life 🌳" },
+  ]
+};
+
+function openGallery(location) {
+  const gallery = galleries[location];
+  if (!gallery) {
+    alert("Gallery for " + location + " not found.");
+    return;
+  }
+
+  // Build slideshow HTML
+  const slideshowInner = document.getElementById('slideshowInner');
+  slideshowInner.innerHTML = gallery.map((img, i) => `
+    <div class="mySlides fade">
+      <div class="numbertext">${i + 1} / ${gallery.length}</div>
+      <img src="${img.src}" style="width:100%">
+      <div class="text">${img.caption}</div>
+    </div>
+  `).join('');
+
+  // Show modal
+  document.getElementById('galleryModal').style.display = 'block';
+  document.body.style.overflow = 'auto';
+  slideIndex = 1;
+  showSlides(slideIndex);
+}
+
+function closeGallery() {
+  document.getElementById('galleryModal').style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function showSlides(n) {
+  const slides = document.getElementsByClassName("mySlides");
+  if (slides.length === 0) return;
+  if (n > slides.length) { slideIndex = 1 }
+  if (n < 1) { slideIndex = slides.length }
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slides[slideIndex - 1].style.display = "block";
+}
+</script>
+  
+    </body>
+</html>
