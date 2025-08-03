@@ -35,17 +35,21 @@ h1 {
     max-width: 180px;
 }
 
-
 .footer {
-    text-align: center;
-    margin-top: auto;
-    padding: 40px 240px;
-    font-family: "Montserrat", sans-serif;
-    font-size: 20px;
-    font-weight: 300;
-    color: white;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);
+  text-align: center;
+  margin-top: auto;
+  padding: 40px 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
+
 
 .map-button {
   background: none;
@@ -134,11 +138,7 @@ h1 {
 
 @media (max-width: 600px) {
   .footer {
-    padding: 20px 10px;  /* smaller padding on narrow screens */
-    font-size: 16px;     /* smaller font for readability */
-    max-width: 90%;            /* make text area wider */
-    margin: 0 auto;            /* keep it centered */
-    text-align: center;        /* keep text centered */
+    font-size: 16px;
     line-height: 1.5;
   }
 }
