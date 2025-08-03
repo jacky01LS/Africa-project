@@ -136,6 +136,7 @@ h1 {
   .footer {
     padding: 20px 10px;  /* smaller padding on narrow screens */
     font-size: 16px;     /* smaller font for readability */
+    text-align: left; 
   }
 }
 
