@@ -136,7 +136,10 @@ h1 {
   .footer {
     padding: 20px 10px;  /* smaller padding on narrow screens */
     font-size: 16px;     /* smaller font for readability */
-    text-align: left; 
+    max-width: 90%;            /* make text area wider */
+    margin: 0 auto;            /* keep it centered */
+    text-align: center;        /* keep text centered */
+    line-height: 1.5;
   }
 }
 
