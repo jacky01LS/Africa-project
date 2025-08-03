@@ -50,6 +50,13 @@ h1 {
   width: 100%;
 }
 
+.footer-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
 
 .map-button {
   background: none;
